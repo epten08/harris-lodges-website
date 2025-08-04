@@ -1,22 +1,28 @@
+// components/InquiryForm.tsx
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useVisitor } from '@/hooks/useVisitor';
 import { InquiryData } from '@/lib/types';
+import { lodges, getLodgeBySlug } from '@/lib/lodge-types';
 
 interface InquiryFormProps {
+  preselectedLodge?: string;
   preselectedRoom?: string;
 }
 
-const InquiryForm = ({ preselectedRoom }: InquiryFormProps) => {
+const InquiryForm = ({ preselectedLodge, preselectedRoom }: InquiryFormProps) => {
   const { visitorId, isReturning } = useVisitor();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPricing, setShowPricing] = useState(false);
   const [pricingData, setPricingData] = useState<any>(null);
+  const [selectedLodge, setSelectedLodge] = useState<string>(preselectedLodge || '');
+  const [availableRooms, setAvailableRooms] = useState<any[]>([]);
   
-  const [formData, setFormData] = useState<InquiryData>({
+  const [formData, setFormData] = useState<InquiryData & { lodge: string }>({
     guestName: '',
     phone: '',
     email: '',
+    lodge: preselectedLodge || '',
     preferredRoom: preselectedRoom || '',
     checkIn: '',
     checkOut: '',
@@ -24,21 +30,36 @@ const InquiryForm = ({ preselectedRoom }: InquiryFormProps) => {
     specialRequests: ''
   });
 
-  const roomOptions = [
-    { id: 'executive-suite', name: 'Executive Suite', type: 'executive' },
-    { id: 'deluxe-room', name: 'Deluxe Room', type: 'deluxe' },
-    { id: 'standard-double', name: 'Standard Double', type: 'deluxe' },
-    { id: 'standard-single', name: 'Standard Single', type: 'single' },
-    { id: 'family-room', name: 'Family Room', type: 'deluxe' },
-    { id: 'budget-single', name: 'Budget Single', type: 'single' }
-  ];
+  const activeLodges = lodges.filter(lodge => lodge.status === 'active');
+
+  // Update available rooms when lodge changes
+  useEffect(() => {
+    if (selectedLodge) {
+      const lodge = getLodgeBySlug(selectedLodge);
+      if (lodge) {
+        setAvailableRooms(lodge.rooms.filter(room => room.available));
+      }
+    } else {
+      setAvailableRooms([]);
+    }
+  }, [selectedLodge]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: name === 'guests' ? parseInt(value) : value
-    }));
+    
+    if (name === 'lodge') {
+      setSelectedLodge(value);
+      setFormData(prev => ({
+        ...prev,
+        [name]: value,
+        preferredRoom: '' // Reset room selection when lodge changes
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: name === 'guests' ? parseInt(value) : value
+      }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -67,6 +88,7 @@ const InquiryForm = ({ preselectedRoom }: InquiryFormProps) => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
+            lodge: formData.lodge,
             roomId: formData.preferredRoom,
             checkIn: formData.checkIn,
             checkOut: formData.checkOut,
@@ -111,12 +133,14 @@ const InquiryForm = ({ preselectedRoom }: InquiryFormProps) => {
           guestName: '',
           phone: '',
           email: '',
+          lodge: '',
           preferredRoom: '',
           checkIn: '',
           checkOut: '',
           guests: 1,
           specialRequests: ''
         });
+        setSelectedLodge('');
         setShowPricing(false);
         setPricingData(null);
       }
@@ -125,6 +149,9 @@ const InquiryForm = ({ preselectedRoom }: InquiryFormProps) => {
       alert('There was an error confirming your booking. Please try again.');
     }
   };
+
+  const selectedLodgeData = selectedLodge ? getLodgeBySlug(selectedLodge) : null;
+  const selectedRoom = availableRooms.find(room => room.id === formData.preferredRoom);
 
   if (showPricing && pricingData) {
     return (
@@ -141,10 +168,12 @@ const InquiryForm = ({ preselectedRoom }: InquiryFormProps) => {
 
         <div className="space-y-4 mb-8">
           <div className="flex justify-between">
+            <span>Lodge:</span>
+            <span className="font-semibold">{selectedLodgeData?.name}</span>
+          </div>
+          <div className="flex justify-between">
             <span>Room:</span>
-            <span className="font-semibold">
-              {roomOptions.find(r => r.id === formData.preferredRoom)?.name}
-            </span>
+            <span className="font-semibold">{selectedRoom?.name}</span>
           </div>
           <div className="flex justify-between">
             <span>Dates:</span>
@@ -253,6 +282,27 @@ const InquiryForm = ({ preselectedRoom }: InquiryFormProps) => {
         </div>
 
         <div>
+          <label htmlFor="lodge" className="block text-sm font-medium text-gray-700 mb-2">
+            Preferred Lodge *
+          </label>
+          <select
+            id="lodge"
+            name="lodge"
+            value={formData.lodge}
+            onChange={handleInputChange}
+            required
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lodge-primary focus:border-transparent"
+          >
+            <option value="">Select a lodge</option>
+            {activeLodges.map((lodge) => (
+              <option key={lodge.id} value={lodge.slug}>
+                {lodge.name} - {lodge.location.city}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
           <label htmlFor="preferredRoom" className="block text-sm font-medium text-gray-700 mb-2">
             Preferred Room *
           </label>
@@ -262,15 +312,23 @@ const InquiryForm = ({ preselectedRoom }: InquiryFormProps) => {
             value={formData.preferredRoom}
             onChange={handleInputChange}
             required
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lodge-primary focus:border-transparent"
+            disabled={!selectedLodge}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lodge-primary focus:border-transparent disabled:bg-gray-100"
           >
-            <option value="">Select a room</option>
-            {roomOptions.map((room) => (
+            <option value="">
+              {selectedLodge ? 'Select a room' : 'Please select a lodge first'}
+            </option>
+            {availableRooms.map((room) => (
               <option key={room.id} value={room.id}>
-                {room.name} ({room.type})
+                {room.name} - From ${room.basePricing.low}/night (Max {room.maxOccupancy} guests)
               </option>
             ))}
           </select>
+          {selectedLodge && availableRooms.length === 0 && (
+            <p className="text-sm text-red-600 mt-1">
+              No available rooms at this lodge. Please contact us directly.
+            </p>
+          )}
         </div>
 
         <div>
@@ -323,6 +381,11 @@ const InquiryForm = ({ preselectedRoom }: InquiryFormProps) => {
               </option>
             ))}
           </select>
+          {selectedRoom && formData.guests > selectedRoom.maxOccupancy && (
+            <p className="text-sm text-red-600 mt-1">
+              Selected room accommodates maximum {selectedRoom.maxOccupancy} guests.
+            </p>
+          )}
         </div>
 
         <div className="md:col-span-2">
@@ -336,16 +399,48 @@ const InquiryForm = ({ preselectedRoom }: InquiryFormProps) => {
             onChange={handleInputChange}
             rows={4}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lodge-primary focus:border-transparent"
-            placeholder="Any special requirements, dietary needs, or preferences..."
+            placeholder="Any special requirements, dietary needs, accessibility needs, or preferences..."
           />
         </div>
       </div>
 
+      {/* Lodge Information Display */}
+      {selectedLodgeData && (
+        <div className="mt-6 p-4 bg-lodge-neutral rounded-lg">
+          <h4 className="font-semibold text-lodge-dark mb-2">Selected Lodge Information</h4>
+          <div className="grid md:grid-cols-2 gap-4 text-sm">
+            <div>
+              <p className="text-gray-600">
+                <strong>Address:</strong> {selectedLodgeData.location.address}
+              </p>
+              <p className="text-gray-600">
+                <strong>Phone:</strong> {selectedLodgeData.contact.phone}
+              </p>
+            </div>
+            <div>
+              <p className="text-gray-600">
+                <strong>Check-in:</strong> {selectedLodgeData.operatingHours.checkIn}
+              </p>
+              <p className="text-gray-600">
+                <strong>Check-out:</strong> {selectedLodgeData.operatingHours.checkOut}
+              </p>
+            </div>
+          </div>
+          {selectedLodgeData.facilities.some(f => f.type === 'conference') && (
+            <div className="mt-2 p-2 bg-blue-50 border border-blue-200 rounded">
+              <p className="text-blue-800 text-xs">
+                📋 This lodge has conference facilities available for business travelers
+              </p>
+            </div>
+          )}
+        </div>
+      )}
+
       <div className="mt-8">
         <button
           type="submit"
-          disabled={isSubmitting}
-          className={`w-full btn-primary ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+          disabled={isSubmitting || !selectedLodge || !formData.preferredRoom}
+          className={`w-full btn-primary ${(isSubmitting || !selectedLodge || !formData.preferredRoom) ? 'opacity-50 cursor-not-allowed' : ''}`}
         >
           {isSubmitting ? 'Processing...' : 'Get Pricing & Continue'}
         </button>
@@ -354,12 +449,26 @@ const InquiryForm = ({ preselectedRoom }: InquiryFormProps) => {
       <div className="mt-4 text-center text-sm text-gray-600">
         <p>
           Need immediate assistance? 
-          <a href="https://wa.me/263123456789" className="text-lodge-primary hover:underline ml-1">
-            WhatsApp us
-          </a>
+          {selectedLodgeData?.contact.whatsapp ? (
+            <a 
+              href={`https://wa.me/${selectedLodgeData.contact.whatsapp.replace(/[^0-9]/g, '')}`} 
+              className="text-lodge-primary hover:underline ml-1"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              WhatsApp {selectedLodgeData.location.city} Lodge
+            </a>
+          ) : (
+            <a href="https://wa.me/263123456789" className="text-lodge-primary hover:underline ml-1">
+              WhatsApp us
+            </a>
+          )}
           {' '}or call{' '}
-          <a href="tel:+263123456789" className="text-lodge-primary hover:underline">
-            +263 123 456 789
+          <a 
+            href={`tel:${selectedLodgeData?.contact.phone || '+263123456789'}`} 
+            className="text-lodge-primary hover:underline"
+          >
+            {selectedLodgeData?.contact.phone || '+263 123 456 789'}
           </a>
         </p>
       </div>
