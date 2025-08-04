@@ -1,103 +1,197 @@
-import Image from "next/image";
+// src/app/page.tsx
+import Hero from '@/components/Hero';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Star, Wifi, Coffee, MapPin } from 'lucide-react';
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const highlights = [
+    {
+      title: "Prime Location",
+      description: "Situated in the heart of Zimbabwe with easy access to major attractions",
+      icon: MapPin
+    },
+    {
+      title: "Modern Amenities",
+      description: "Free WiFi, parking, and 24/7 room service for your comfort",
+      icon: Wifi
+    },
+    {
+      title: "Authentic Experience", 
+      description: "Immerse yourself in genuine Zimbabwean culture and hospitality",
+      icon: Coffee
+    }
+  ];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <>
+      <Hero />
+      
+      {/* About Section */}
+      <section className="py-16 bg-white">
+        <div className="container-max section-padding">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold text-lodge-primary mb-6 font-serif">
+                Your Home Away From Home
+              </h2>
+              <p className="text-gray-700 text-lg mb-6 leading-relaxed">
+                Harris Lodges offers premium accommodation in the heart of Zimbabwe. 
+                Our commitment to excellence and authentic Zimbabwean hospitality ensures 
+                every guest experiences the warmth and beauty of our nation.
+              </p>
+              <p className="text-gray-700 text-lg mb-8 leading-relaxed">
+                From business travelers to tourists exploring Zimbabwe&apos;s natural wonders, 
+                we provide comfortable, modern rooms with traditional touches that reflect 
+                our rich cultural heritage.
+              </p>
+              <Link href="/about" className="btn-primary">
+                Learn More About Us
+              </Link>
+            </div>
+            <div className="relative h-96 rounded-lg overflow-hidden">
+              <Image
+                src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                alt="Harris Lodges Interior"
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+
+      {/* Highlights */}
+      <section className="py-16 bg-lodge-neutral">
+        <div className="container-max section-padding">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-lodge-primary mb-12 font-serif">
+            Why Choose Harris Lodges
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {highlights.map((highlight, index) => {
+              const IconComponent = highlight.icon;
+              return (
+                <div key={index} className="text-center bg-white p-8 rounded-lg shadow-md">
+                  <div className="w-16 h-16 bg-lodge-primary rounded-full flex items-center justify-center mx-auto mb-6">
+                    <IconComponent className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-lodge-dark mb-4">
+                    {highlight.title}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    {highlight.description}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Rooms Preview */}
+      <section className="py-16 bg-white">
+        <div className="container-max section-padding">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-lodge-primary mb-4 font-serif">
+              Our Accommodation
+            </h2>
+            <p className="text-gray-700 text-lg max-w-2xl mx-auto">
+              Discover our range of comfortable rooms designed to meet every traveler&apos;s needs
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            {[
+              {
+                name: "Executive Suite",
+                type: "executive",
+                description: "Spacious suite with premium amenities and city views",
+                image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+              },
+              {
+                name: "Deluxe Room",
+                type: "deluxe", 
+                description: "Comfortable room with modern furnishings and garden views",
+                image: "https://images.unsplash.com/photo-1631049421450-348ccd7f8949?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+              },
+              {
+                name: "Standard Single",
+                type: "single",
+                description: "Cozy single room perfect for business travelers",
+                image: "https://images.unsplash.com/photo-1631049035634-c04d68b1d1f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+              }
+            ].map((room, index) => (
+              <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div className="relative h-48">
+                  <Image
+                    src={room.image}
+                    alt={room.name}
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute top-4 right-4">
+                    <span className={`px-3 py-1 text-xs font-semibold rounded-full ${
+                      room.type === 'executive' ? 'bg-lodge-accent text-lodge-dark' :
+                      room.type === 'deluxe' ? 'bg-lodge-secondary text-white' :
+                      'bg-lodge-primary text-white'
+                    }`}>
+                      {room.type.charAt(0).toUpperCase() + room.type.slice(1)}
+                    </span>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold text-lodge-dark mb-2">
+                    {room.name}
+                  </h3>
+                  <p className="text-gray-600 mb-4">
+                    {room.description}
+                  </p>
+                  <div className="flex justify-between items-center">
+                    <Link
+                      href="/inquiry"
+                      className="text-lodge-primary hover:text-lodge-dark font-semibold"
+                    >
+                      Request Price →
+                    </Link>
+                    <div className="flex text-lodge-accent">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} size={16} fill="currentColor" />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <div className="text-center">
+            <Link href="/rooms" className="btn-primary text-lg">
+              View All Rooms
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Call to Action */}
+      <section className="py-16 bg-lodge-primary text-white">
+        <div className="container-max section-padding text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 font-serif">
+            Ready to Experience Zimbabwe?
+          </h2>
+          <p className="text-xl mb-8 max-w-2xl mx-auto">
+            Book your stay at Harris Lodges and discover the perfect blend of comfort, 
+            hospitality, and authentic Zimbabwean culture.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/inquiry" className="bg-white text-lodge-primary hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold transition-colors">
+              Book Now
+            </Link>
+            <Link href="/contact" className="border-2 border-white text-white hover:bg-white hover:text-lodge-primary px-8 py-4 rounded-lg font-semibold transition-colors">
+              Contact Us
+            </Link>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
