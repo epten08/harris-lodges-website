@@ -1,10 +1,11 @@
+// components/Hero.tsx
 'use client';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useVisitor } from '@/hooks/useVisitor';
+import { useUser } from '@/hooks/useUser';
 
 const Hero = () => {
-  const { isReturning } = useVisitor();
+  const { isReturning, user, discountPercentage, recommendations } = useUser();
 
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
@@ -23,34 +24,73 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-10 text-center text-white section-padding">
         <div className="container-max">
-          {isReturning && (
-            <div className="mb-4 inline-block bg-lodge-accent text-lodge-dark px-4 py-2 rounded-full text-sm font-medium">
-              Welcome back! Special returning guest discounts available
+          {/* Returning User Welcome */}
+          {isReturning && user && (
+            <div className="mb-4 inline-block bg-lodge-accent text-lodge-dark px-6 py-3 rounded-full text-base font-semibold animate-pulse">
+              🎉 Welcome back, {user.fullName}! 
+              {discountPercentage > 0 && (
+                <span className="ml-2">Save {discountPercentage}% on your next stay</span>
+              )}
+            </div>
+          )}
+          
+          {/* New User Welcome */}
+          {!isReturning && (
+            <div className="mb-4 inline-block bg-white bg-opacity-20 text-white px-6 py-3 rounded-full text-base font-medium backdrop-blur-sm">
+              ✨ Discover authentic Zimbabwean hospitality
             </div>
           )}
           
           <h1 className="text-4xl md:text-6xl font-bold mb-6 font-serif">
             Welcome to Harris Lodges
           </h1>
+          
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed">
             Experience authentic Zimbabwean hospitality in our premium lodge accommodation. 
             Where comfort meets the beauty of Zimbabwe&apos;s landscapes.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link
-              href="/rooms"
-              className="btn-primary text-lg px-8 py-4"
-            >
-              Explore Our Rooms
-            </Link>
+            {/* Personalized CTA for returning users */}
+            {isReturning && recommendations?.preferredLodge ? (
+              <Link
+                href={`/lodges/${recommendations.preferredLodge}`}
+                className="btn-primary text-lg px-8 py-4"
+              >
+                Visit Your Favorite Lodge
+              </Link>
+            ) : (
+              <Link
+                href="/lodges"
+                className="btn-primary text-lg px-8 py-4"
+              >
+                Explore Our Lodges
+              </Link>
+            )}
+            
             <Link
               href="/inquiry"
               className="btn-secondary text-lg px-8 py-4"
             >
-              Book Your Stay
+              {isReturning ? 'Book Another Stay' : 'Book Your Stay'}
             </Link>
           </div>
+
+          {/* Personalized Information */}
+          {isReturning && user && (
+            <div className="mt-8 bg-black bg-opacity-30 backdrop-blur-sm rounded-lg p-4 max-w-md mx-auto">
+              <h3 className="text-lg font-semibold mb-2">Your Harris Lodges Profile</h3>
+              <div className="text-sm space-y-1">
+                <p>🏆 Status: {recommendations?.loyaltyTier || 'Member'}</p>
+                <p>📊 Previous stays: {user.bookingHistory.length}</p>
+                {discountPercentage > 0 && (
+                  <p className="text-lodge-accent font-semibold">
+                    💰 Current discount: {discountPercentage}%
+                  </p>
+                )}
+              </div>
+            </div>
+          )}
 
           {/* WhatsApp Quick Contact */}
           <div className="mt-8">
