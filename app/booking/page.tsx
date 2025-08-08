@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import BookingForm from '@/components/BookingForm'
+import EnhancedInquiryForm from '@/components/EnhancedInquiryForm'
 
 export const metadata: Metadata = {
   title: 'Book Your Stay - Harris Lodges',
@@ -10,5 +10,5 @@ export const metadata: Metadata = {
 }
 
 export default function BookingPage() {
-  return <BookingForm />
+  return <EnhancedInquiryForm />
 }

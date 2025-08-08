@@ -2,14 +2,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 // In a real application, this would connect to your database
-const users = new Map<string, any>();
+//const users = new Map<string, any>();
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const userId = params.id;
+    const { id } = await params;
+    const userId = id;
     const body = await request.json();
     const { sessionId, deviceId, timestamp } = body;
 

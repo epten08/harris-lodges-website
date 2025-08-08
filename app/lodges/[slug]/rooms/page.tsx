@@ -5,16 +5,17 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { 
   Users, Bed, Maximize, Star, ArrowLeft, 
-  ChevronLeft, ChevronRight, Phone, MessageCircle,
+   Phone, MessageCircle,
   Wifi, Car, Coffee, Tv, Bath, AirVent, MapPin
 } from 'lucide-react';
-import { getLodgeBySlug, LodgeRoom } from '@/lib/lodge-types';
+import { getLodgeBySlug, LodgeRoom, Lodge } from '@/lib/lodge-types';
 
 // Generate metadata dynamically
 export async function generateMetadata(
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ): Promise<Metadata> {
-  const lodge = getLodgeBySlug(params.slug);
+  const { slug } = await params;
+  const lodge = getLodgeBySlug(slug);
   
   if (!lodge) {
     return {
@@ -78,7 +79,7 @@ const getRoomTypeBadge = (type: string) => {
 
 interface RoomCardProps {
   room: LodgeRoom;
-  lodge: any;
+  lodge: Lodge;
 }
 
 const RoomCard = ({ room, lodge }: RoomCardProps) => {
@@ -264,8 +265,9 @@ const RoomCard = ({ room, lodge }: RoomCardProps) => {
   );
 };
 
-export default function LodgeRoomsPage({ params }: { params: { slug: string } }) {
-  const lodge = getLodgeBySlug(params.slug);
+export default async function LodgeRoomsPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const lodge = getLodgeBySlug(slug);
   
   if (!lodge) {
     notFound();
@@ -276,7 +278,7 @@ export default function LodgeRoomsPage({ params }: { params: { slug: string } })
   const executiveRooms = lodge.rooms.filter(room => room.type === 'executive');
   const deluxeRooms = lodge.rooms.filter(room => room.type === 'deluxe');
   const familyRooms = lodge.rooms.filter(room => room.type === 'family');
-  const standardRooms = lodge.rooms.filter(room => room.type === 'single');
+  const standardRooms = lodge.rooms.filter(room => room.type === 'standard');
 
   const availableRooms = lodge.rooms.filter(room => room.available);
   const unavailableRooms = lodge.rooms.filter(room => !room.available);

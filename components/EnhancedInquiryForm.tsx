@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useUser } from '@/hooks/useUser';
 import { InquiryData } from '@/lib/types';
-import { lodges, getLodgeBySlug } from '@/lib/lodge-types';
+import { lodges, getLodgeBySlug, LodgeRoom } from '@/lib/lodge-types';
 
 interface EnhancedInquiryFormProps {
   preselectedLodge?: string;
@@ -25,9 +25,15 @@ const EnhancedInquiryForm = ({ preselectedLodge, preselectedRoom }: EnhancedInqu
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPricing, setShowPricing] = useState(false);
-  const [pricingData, setPricingData] = useState<any>(null);
+  const [pricingData, setPricingData] = useState<{
+    basePrice: number;
+    totalPrice: number;
+    discountAmount?: number;
+    roomType: string;
+    nights: number;
+  } | null>(null);
   const [selectedLodge, setSelectedLodge] = useState<string>(preselectedLodge || '');
-  const [availableRooms, setAvailableRooms] = useState<any[]>([]);
+  const [availableRooms, setAvailableRooms] = useState<LodgeRoom[]>([]);
   const [userLookupPerformed, setUserLookupPerformed] = useState(false);
   
   const [formData, setFormData] = useState<InquiryData & { lodge: string }>({
@@ -229,23 +235,23 @@ const EnhancedInquiryForm = ({ preselectedLodge, preselectedRoom }: EnhancedInqu
         {isReturning && (
           <div className="bg-lodge-accent bg-opacity-20 border border-lodge-accent p-4 rounded-lg mb-6">
             <div className="flex items-center mb-2">
-              <span className="text-2xl mr-2">🎉</span>
+              
               <h4 className="font-semibold text-lodge-dark">Welcome Back, {user?.fullName || 'Valued Guest'}!</h4>
             </div>
             <div className="space-y-1 text-sm">
               {discountPercentage > 0 && (
                 <p className="text-lodge-dark font-medium">
-                  ✨ You're getting a {discountPercentage}% loyalty discount!
+                  You&apos;re getting a {discountPercentage}% loyalty discount!
                 </p>
               )}
               {recommendations?.loyaltyTier && (
                 <p className="text-lodge-dark">
-                  🏆 Your status: {recommendations.loyaltyTier} Member
+                  Your status: {recommendations.loyaltyTier} Member
                 </p>
               )}
               {user && user.bookingHistory.length > 0 && (
                 <p className="text-lodge-dark">
-                  📊 This will be your {user.bookingHistory.length + 1}{getOrdinalSuffix(user.bookingHistory.length + 1)} stay with us
+                  This will be your {user.bookingHistory.length + 1}{getOrdinalSuffix(user.bookingHistory.length + 1)} stay with us
                 </p>
               )}
             </div>
@@ -294,7 +300,7 @@ const EnhancedInquiryForm = ({ preselectedLodge, preselectedRoom }: EnhancedInqu
         {/* Personalized Perks */}
         {isReturning && recommendations && (
           <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg mb-6">
-            <h4 className="font-semibold text-blue-800 mb-2">🎁 Your Exclusive Perks</h4>
+            <h4 className="font-semibold text-blue-800 mb-2">Your Exclusive Perks</h4>
             <ul className="text-sm text-blue-700 space-y-1">
               {recommendations.loyaltyTier === 'VIP' && (
                 <>
@@ -396,7 +402,7 @@ const EnhancedInquiryForm = ({ preselectedLodge, preselectedRoom }: EnhancedInqu
       {!isReturning && !isLoading && (formData.email || formData.phone) && userLookupPerformed && (
         <div className="bg-green-50 border border-green-200 p-4 rounded-lg mb-6">
           <p className="text-green-800 text-sm">
-            ✨ New to Harris Lodges? You'll automatically become a member and enjoy benefits from your next visit!
+            ✨ New to Harris Lodges? You&apos;ll automatically become a member and enjoy benefits from your next visit!
           </p>
         </div>
       )}
@@ -609,7 +615,7 @@ const EnhancedInquiryForm = ({ preselectedLodge, preselectedRoom }: EnhancedInqu
           {selectedLodgeData.facilities.some(f => f.type === 'conference') && (
             <div className="mt-2 p-2 bg-blue-50 border border-blue-200 rounded">
               <p className="text-blue-800 text-xs">
-                📋 This lodge has conference facilities available for business travelers
+                This lodge has conference facilities available for business travelers
               </p>
             </div>
           )}

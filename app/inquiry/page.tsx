@@ -9,13 +9,14 @@ export const metadata: Metadata = {
 };
 
 interface InquiryPageProps {
-  searchParams: { 
+  searchParams: Promise<{ 
     room?: string;
     lodge?: string;
-  };
+  }>;
 }
 
-export default function InquiryPage({ searchParams }: InquiryPageProps) {
+export default async function InquiryPage({ searchParams }: InquiryPageProps) {
+  const { room, lodge } = await searchParams;
   return (
     <div className="min-h-screen bg-lodge-neutral py-16">
       <div className="container-max section-padding">
@@ -31,17 +32,15 @@ export default function InquiryPage({ searchParams }: InquiryPageProps) {
 
         <div className="max-w-4xl mx-auto">
           <EnhancedInquiryForm 
-            preselectedLodge={searchParams.lodge}
-            preselectedRoom={searchParams.room} 
+            preselectedLodge={lodge}
+            preselectedRoom={room} 
           />
         </div>
 
         {/* Enhanced Information for Returning Users */}
         <div className="mt-16 grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           <div className="bg-white p-6 rounded-lg shadow-md text-center">
-            <div className="w-12 h-12 bg-lodge-primary rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-white text-xl">🎯</span>
-            </div>
+            
             <h3 className="text-lg font-semibold text-lodge-dark mb-2">Smart Recognition</h3>
             <p className="text-gray-600 text-sm">
               We recognize you across devices using your email or phone. Get personalized recommendations 
@@ -50,9 +49,7 @@ export default function InquiryPage({ searchParams }: InquiryPageProps) {
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow-md text-center">
-            <div className="w-12 h-12 bg-lodge-secondary rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-white text-xl">💰</span>
-            </div>
+            
             <h3 className="text-lg font-semibold text-lodge-dark mb-2">Loyalty Rewards</h3>
             <p className="text-gray-600 text-sm">
               Returning guests enjoy automatic discounts: 10% for returning guests, 15% for frequent guests, 
@@ -61,9 +58,7 @@ export default function InquiryPage({ searchParams }: InquiryPageProps) {
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow-md text-center">
-            <div className="w-12 h-12 bg-lodge-accent rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-lodge-dark text-xl">⚡</span>
-            </div>
+            
             <h3 className="text-lg font-semibold text-lodge-dark mb-2">Express Booking</h3>
             <p className="text-gray-600 text-sm">
               Your information is pre-filled automatically. Known preferences speed up your booking process 
@@ -81,22 +76,22 @@ export default function InquiryPage({ searchParams }: InquiryPageProps) {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="text-center">
-              <span className="text-2xl mb-2 block">🏆</span>
+              
               <h4 className="font-medium text-lodge-dark mb-1">Best Rate Guarantee</h4>
               <p className="text-sm text-gray-600">We match any lower rate you find</p>
             </div>
             <div className="text-center">
-              <span className="text-2xl mb-2 block">🎁</span>
+            
               <h4 className="font-medium text-lodge-dark mb-1">Exclusive Perks</h4>
               <p className="text-sm text-gray-600">Room upgrades & late checkouts</p>
             </div>
             <div className="text-center">
-              <span className="text-2xl mb-2 block">🚗</span>
+              
               <h4 className="font-medium text-lodge-dark mb-1">Free Services</h4>
               <p className="text-sm text-gray-600">Complimentary WiFi & parking</p>
             </div>
             <div className="text-center">
-              <span className="text-2xl mb-2 block">📞</span>
+             
               <h4 className="font-medium text-lodge-dark mb-1">24/7 Support</h4>
               <p className="text-sm text-gray-600">Direct line to our team</p>
             </div>

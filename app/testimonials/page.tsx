@@ -1,6 +1,5 @@
 // src/app/testimonials/page.tsx
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import { Star, Quote } from 'lucide-react';
 import { Testimonial } from '@/lib/types';
 import PageHero from '@/components/PageHero';

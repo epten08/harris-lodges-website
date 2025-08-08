@@ -9,16 +9,16 @@ const HomepageAboutSection = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-lodge-primary mb-6 font-serif">
-              Zimbabwe's Premier Lodge Network
+              Zimbabwe&apos;s Premier Lodge Network
             </h2>
             <p className="text-gray-700 text-lg mb-6 leading-relaxed">
-              Harris Lodges operates a network of premium accommodations across Zimbabwe's 
+              Harris Lodges operates a network of premium accommodations across Zimbabwe&apos;s 
               most sought-after destinations. From the business hub of Harare to the natural 
               wonder of Victoria Falls, each lodge offers unique experiences while maintaining 
               our signature commitment to authentic Zimbabwean hospitality.
             </p>
             <p className="text-gray-700 text-lg mb-8 leading-relaxed">
-              Whether you're traveling for business, leisure, or hosting conferences, our lodges 
+              Whether you&apos;re traveling for business, leisure, or hosting conferences, our lodges 
               provide modern comfort, professional facilities, and the warm welcome that Zimbabwe 
               is famous for. Each location is strategically positioned to give you the best access 
               to local attractions, business centers, and cultural experiences.

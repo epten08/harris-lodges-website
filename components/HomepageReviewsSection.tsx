@@ -80,7 +80,7 @@ const HomepageReviewsSection = ({ lodges }: HomepageReviewsSectionProps) => {
               </div>
               
               <p className="text-gray-700 text-sm leading-relaxed mb-3">
-                "{review.comment}"
+                &quot;{review.comment}&quot;
               </p>
               
               <div className="flex justify-between items-center text-xs">

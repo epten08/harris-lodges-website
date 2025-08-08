@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useVisitor } from '@/hooks/useVisitor';
 import { InquiryData } from '@/lib/types';
-import { lodges, getLodgeBySlug } from '@/lib/lodge-types';
+import { lodges, getLodgeBySlug, LodgeRoom } from '@/lib/lodge-types';
 
 interface InquiryFormProps {
   preselectedLodge?: string;
@@ -14,9 +14,15 @@ const InquiryForm = ({ preselectedLodge, preselectedRoom }: InquiryFormProps) =>
   const { visitorId, isReturning } = useVisitor();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPricing, setShowPricing] = useState(false);
-  const [pricingData, setPricingData] = useState<any>(null);
+  const [pricingData, setPricingData] = useState<{
+    basePrice: number;
+    totalPrice: number;
+    discountAmount?: number;
+    roomType: string;
+    nights: number;
+  } | null>(null);
   const [selectedLodge, setSelectedLodge] = useState<string>(preselectedLodge || '');
-  const [availableRooms, setAvailableRooms] = useState<any[]>([]);
+  const [availableRooms, setAvailableRooms] = useState<LodgeRoom[]>([]);
   
   const [formData, setFormData] = useState<InquiryData & { lodge: string }>({
     guestName: '',
@@ -158,10 +164,10 @@ const InquiryForm = ({ preselectedLodge, preselectedRoom }: InquiryFormProps) =>
       <div className="bg-white p-8 rounded-lg shadow-lg">
         <h3 className="text-2xl font-bold text-lodge-primary mb-6">Your Pricing Details</h3>
         
-        {isReturning && pricingData.discount && (
+        {isReturning && pricingData.discountAmount && (
           <div className="bg-lodge-accent bg-opacity-20 border border-lodge-accent p-4 rounded-lg mb-6">
             <p className="text-lodge-dark font-semibold">
-              🎉 Welcome back! You&apos;re getting a {pricingData.discount}% returning guest discount!
+              🎉 Welcome back! You&apos;re getting a discount of ${pricingData.discountAmount.toFixed(2)}!
             </p>
           </div>
         )}
@@ -191,10 +197,10 @@ const InquiryForm = ({ preselectedLodge, preselectedRoom }: InquiryFormProps) =>
             <span>Base Price per night:</span>
             <span>${pricingData.basePrice}</span>
           </div>
-          {pricingData.discount && (
+          {pricingData.discountAmount && (
             <div className="flex justify-between text-green-600">
-              <span>Discount ({pricingData.discount}%):</span>
-              <span>-${((pricingData.basePrice * pricingData.nights * pricingData.discount) / 100).toFixed(2)}</span>
+              <span>Discount:</span>
+              <span>-${pricingData.discountAmount.toFixed(2)}</span>
             </div>
           )}
           <div className="border-t pt-4">

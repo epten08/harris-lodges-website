@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { roomId, checkIn, checkOut, guests, visitorId, isReturning } = body;
+    const { roomId, checkIn, checkOut,  isReturning } = body;
 
     // Calculate nights
     const checkInDate = new Date(checkIn);

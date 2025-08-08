@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import RoomCard from '@/components/RoomsCard';
 import Link from 'next/link';
 import { Room } from '@/lib/types';
-import { Filter, SortAsc, MapPin, Wifi, Car, Coffee, Star, Users } from 'lucide-react';
+import {  Wifi, Car, Coffee, Star } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Rooms & Accommodation - Harris Lodges Zimbabwe',

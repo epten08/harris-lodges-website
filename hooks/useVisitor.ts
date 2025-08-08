@@ -13,7 +13,7 @@ export const useVisitor = () => {
     if (id) {
       setIsReturning(true);
     } else {
-      id = `visitor_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      id = `visitor_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`;
       Cookies.set('harris_visitor_id', id, { expires: 365 });
       setIsReturning(false);
     }

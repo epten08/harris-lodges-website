@@ -5,16 +5,17 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { 
   MapPin, Phone, Mail, Clock, Star, Users, Calendar, 
-  Wifi, Car, Coffee, MessageCircle, Navigation, 
-  CheckCircle, DollarSign, Camera
+  Wifi, Coffee, MessageCircle, Navigation, 
+  CheckCircle, Camera
 } from 'lucide-react';
-import { getLodgeBySlug, Lodge, Facility } from '@/lib/lodge-types';
+import { getLodgeBySlug, Facility } from '@/lib/lodge-types';
 
 // Generate metadata dynamically based on the lodge
 export async function generateMetadata(
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ): Promise<Metadata> {
-  const lodge = getLodgeBySlug(params.slug);
+  const { slug } = await params;
+  const lodge = getLodgeBySlug(slug);
   
   if (!lodge) {
     return {
@@ -136,8 +137,9 @@ const FacilityCard = ({ facility }: { facility: Facility }) => {
   );
 };
 
-export default function LodgePage({ params }: { params: { slug: string } }) {
-  const lodge = getLodgeBySlug(params.slug);
+export default async function LodgePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const lodge = getLodgeBySlug(slug);
   
   if (!lodge) {
     notFound();
