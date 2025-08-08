@@ -38,8 +38,8 @@ export default function Home() {
       {/* Call to Action */}
       <HomepageCTASection lodgeCount={activeLodges.length} />
 
-      {/* Map Overview */}
-      <HomepageMapSection lodges={activeLodges} />
+      {/* About Overview */}
+      <HomepageMapSection />
 
       {/* Guest Reviews Summary */}
       <HomepageReviewsSection lodges={lodges} />

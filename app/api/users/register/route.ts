@@ -40,6 +40,8 @@ export async function POST(request: NextRequest) {
       // Update preferences if provided
       if (preferences) {
         existingUser.preferences = {
+          communicationPreference: 'email',
+          marketingConsent: false,
           ...existingUser.preferences,
           ...preferences
         };
@@ -62,7 +64,7 @@ export async function POST(request: NextRequest) {
 
     // Create new user
     const newUser: UserProfile = {
-      id: `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      id: `user_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`,
       email: normalizedEmail,
       phone,
       fullName,
