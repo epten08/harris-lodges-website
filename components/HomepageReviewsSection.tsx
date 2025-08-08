@@ -15,7 +15,7 @@ const HomepageReviewsSection = ({ lodges }: HomepageReviewsSectionProps) => {
     {
       name: "Sarah M.",
       location: "Cape Town, SA",
-      lodge: "Harris Lodge Harare",
+      lodge: "Prime Lodge",
       rating: 5,
       comment: "Exceptional business facilities and professional service. The conference room was perfect for our regional meeting.",
       date: "2 weeks ago"
@@ -23,7 +23,7 @@ const HomepageReviewsSection = ({ lodges }: HomepageReviewsSectionProps) => {
     {
       name: "Michael T.",
       location: "London, UK",
-      lodge: "Harris Lodge Victoria Falls",
+      lodge: "Silver Sands Lodge",
       rating: 5,
       comment: "Breathtaking location with world-class service. The falls view from our suite was absolutely stunning.",
       date: "1 month ago"
@@ -31,7 +31,7 @@ const HomepageReviewsSection = ({ lodges }: HomepageReviewsSectionProps) => {
     {
       name: "Tendai K.",
       location: "Bulawayo, ZW",
-      lodge: "Harris Lodge Bulawayo",
+      lodge: "Executive Lodge",
       rating: 4,
       comment: "Perfect for exploring Matobo National Park. Great local hospitality and authentic Zimbabwean experience.",
       date: "3 weeks ago"

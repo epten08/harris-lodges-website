@@ -1,13 +1,26 @@
 // components/Header.tsx
 'use client';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X, Phone, ChevronDown, MapPin, Building } from 'lucide-react';
 import { lodges } from '@/lib/lodge-types';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLodgesDropdownOpen, setIsLodgesDropdownOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    // Set initial state
+    handleScroll();
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navigation = [
     { name: 'Home', href: '/' },
@@ -21,7 +34,11 @@ const Header = () => {
   const activeLodges = lodges.filter(lodge => lodge.status === 'active');
 
   return (
-    <header className="bg-white shadow-lg sticky top-0 z-50">
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${
+      isScrolled 
+        ? 'bg-white/90 backdrop-blur-sm shadow-md' 
+        : 'bg-transparent shadow-none md:bg-transparent bg-white/95 md:shadow-none shadow-sm'
+    }`}>
       <div className="container-max section-padding">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
@@ -31,7 +48,7 @@ const Header = () => {
             </div>
             <div>
               <h1 className="text-xl font-bold text-lodge-primary">Harris Lodges</h1>
-              <p className="text-xs text-gray-600">Zimbabwe Hospitality</p>
+              <p className="text-xs text-amber-600 font-medium">Where Adventure Meets Luxury</p>
             </div>
           </Link>
 
@@ -45,7 +62,11 @@ const Header = () => {
                     onMouseEnter={() => setIsLodgesDropdownOpen(true)}
                     onMouseLeave={() => setIsLodgesDropdownOpen(false)}
                   >
-                    <button className="flex items-center space-x-1 text-lodge-dark hover:text-lodge-primary transition-colors font-medium">
+                    <button className={`flex items-center space-x-1 transition-colors font-semibold ${
+                      isScrolled 
+                        ? 'text-lodge-dark hover:text-lodge-primary' 
+                        : 'text-white hover:text-amber-200 drop-shadow-md'
+                    }`}>
                       <span>{item.name}</span>
                       <ChevronDown size={16} className={`transition-transform ${isLodgesDropdownOpen ? 'rotate-180' : ''}`} />
                     </button>
@@ -101,7 +122,11 @@ const Header = () => {
                 ) : (
                   <Link
                     href={item.href}
-                    className="text-lodge-dark hover:text-lodge-primary transition-colors font-medium"
+                    className={`transition-colors font-semibold ${
+                      isScrolled 
+                        ? 'text-lodge-dark hover:text-lodge-primary' 
+                        : 'text-white hover:text-amber-200 drop-shadow-md'
+                    }`}
                   >
                     {item.name}
                   </Link>
@@ -114,15 +139,23 @@ const Header = () => {
           <div className="flex items-center space-x-4">
             <a
               href="tel:+263123456789"
-              className="hidden sm:flex items-center space-x-2 text-lodge-secondary hover:text-green-700 transition-colors"
+              className={`hidden sm:flex items-center space-x-2 transition-colors ${
+                isScrolled 
+                  ? 'text-lodge-secondary hover:text-green-700' 
+                  : 'text-white/90 hover:text-white drop-shadow-md'
+              }`}
             >
               <Phone size={18} />
-              <span className="font-medium">+263 123 456 789</span>
+              <span className="font-medium">+263 772 667 410</span>
             </a>
             
             <Link
               href="/inquiry"
-              className="hidden sm:block btn-primary text-sm"
+              className={`hidden sm:block text-sm px-4 py-2 rounded-md font-semibold transition-all ${
+                isScrolled 
+                  ? 'bg-lodge-primary text-white hover:bg-lodge-dark' 
+                  : 'bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm border border-white/30'
+              }`}
             >
               Book Now
             </Link>
@@ -130,7 +163,11 @@ const Header = () => {
             {/* Mobile menu button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2"
+              className={`md:hidden p-2 ${
+                isScrolled 
+                  ? 'text-lodge-dark' 
+                  : 'text-white drop-shadow-md'
+              }`}
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -183,7 +220,7 @@ const Header = () => {
                   className="flex items-center space-x-2 text-lodge-secondary mb-4"
                 >
                   <Phone size={18} />
-                  <span>+263 123 456 789</span>
+                  <span>+263 772 667 410</span>
                 </a>
                 <Link
                   href="/inquiry"

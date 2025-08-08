@@ -5,18 +5,18 @@ import FeatureCard from './FeatureCard';
 const HomepageHighlightsSection = () => {
   const highlights = [
     {
-      title: "Multiple Locations",
-      description: "3 lodges across Zimbabwe's most beautiful destinations",
+      title: "Strategic Bulawayo Locations",
+      description: "5+ affordable lodges strategically located around Bulawayo for easy business access",
       icon: MapPin
     },
     {
-      title: "Modern Amenities",
-      description: "Free WiFi, parking, and 24/7 room service at all locations",
+      title: "Business-Ready Facilities",
+      description: "Free WiFi, secure parking, meeting spaces, and 24/7 service - perfect for business travelers",
       icon: Wifi
     },
     {
-      title: "Authentic Experience", 
-      description: "Immerse yourself in genuine Zimbabwean culture and hospitality",
+      title: "Affordable Excellence", 
+      description: "Premium hospitality at budget-friendly rates, ideal for extended business stays",
       icon: Coffee
     }
   ];

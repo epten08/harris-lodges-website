@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import { Star, Quote } from 'lucide-react';
 import { Testimonial } from '@/lib/types';
+import PageHero from '@/components/PageHero';
 
 export const metadata: Metadata = {
   title: 'Guest Reviews & Testimonials',
@@ -158,19 +159,10 @@ export default function TestimonialsPage() {
   return (
     <div className="min-h-screen bg-lodge-neutral">
       {/* Header */}
-      <section className="bg-lodge-primary text-white py-16">
-        <div className="container-max section-padding">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 font-serif">
-              Guest Reviews & Testimonials
-            </h1>
-            <p className="text-xl max-w-3xl mx-auto leading-relaxed">
-              Hear from our valued guests about their experiences at Harris Lodges. 
-              Your satisfaction is our greatest achievement.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero 
+        title="Guest Reviews & Testimonials"
+        description="Hear from our valued guests about their experiences at Harris Lodges. Your satisfaction is our greatest achievement."
+      />
 
       {/* Stats Section */}
       <section className="py-16 bg-white">

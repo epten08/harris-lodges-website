@@ -74,13 +74,14 @@ const FeaturedLodgesSection = ({ lodges }: FeaturedLodgesSectionProps) => {
                 )}
                 
                 <div className="flex justify-between items-center mb-4">
-                  <div className="text-sm">
+                  {/* do not display price */}
+                  {/* <div className="text-sm">
                     <span className="text-gray-600">From </span>
                     <span className="font-bold text-lodge-primary">
                       ${Math.min(...lodge.rooms.map(r => r.basePricing.low))}
                     </span>
                     <span className="text-gray-600">/night</span>
-                  </div>
+                  </div> */}
                   <div className="flex text-lodge-accent">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} size={14} fill="currentColor" />

@@ -82,7 +82,7 @@ export interface LodgeRoom extends Room {
 export interface Room {
   id: string;
   name: string;
-  type: 'single' | 'deluxe' | 'executive' | 'suite' | 'family' | 'conference';
+  type: 'standard' | 'deluxe' | 'executive' | 'suite' | 'family' | 'conference';
   description: string;
   amenities: string[];
   images: string[];
@@ -95,23 +95,23 @@ export interface Room {
 // Sample lodge data
 export const lodges: Lodge[] = [
   {
-    id: 'harris-lodge-harare',
-    name: 'Harris Lodge Harare',
-    slug: 'harare',
-    description: 'Our flagship location in the heart of Zimbabwe\'s capital city, offering premium accommodation and comprehensive business facilities.',
-    shortDescription: 'Premium accommodation in Zimbabwe\'s capital',
+    id: 'harris-executive',
+    name: 'Harris Executive',
+    slug: 'executive',
+    description: 'Our flagship location in the city of Kings and Queens, offering premium accommodation and comprehensive business facilities.',
+    shortDescription: 'Premium accommodation in Bulawayo',
     location: {
-      address: '123 Hospitality Avenue, Harare CBD',
-      city: 'Harare',
-      region: 'Harare Province',
+      address: '104 J. Tongogara Str Btwn 10 & 11 Ave, Bulawayo CBD',
+      city: 'Bulawayo',
+      region: 'Bulawayo Province',
       country: 'Zimbabwe',
-      coordinates: { lat: -17.8252, lng: 31.0335 }
+      coordinates: { lat: -20.15939, lng: 28.58697 }
     },
     contact: {
-      phone: '+263 4 123 4567',
-      email: 'harare@harrislodges.com',
-      whatsapp: '+263 77 123 4567',
-      emergencyPhone: '+263 77 999 8888'
+      phone: '+263 772 667 410',
+      email: 'theharrisguesthouse@gmail.com',
+      whatsapp: '+263 772 667 410',
+      emergencyPhone: '+263 719 667 410'
     },
     images: {
       hero: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
@@ -122,14 +122,14 @@ export const lodges: Lodge[] = [
         'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
       ]
     },
-    amenities: ['24/7 Reception', 'Free WiFi', 'Free Parking', 'Airport Shuttle', 'Laundry Service', 'Room Service'],
+    amenities: ['24/7 Reception', 'Dstv & WiFi', 'Secure Parking','Dining', 'Affordable'],
     facilities: [
       {
-        id: 'conference-center-harare',
+        id: 'conference-center-bulawayo',
         name: 'Executive Conference Center',
         type: 'conference',
-        description: 'State-of-the-art conference facilities with capacity for up to 200 delegates',
-        capacity: 200,
+        description: 'State-of-the-art conference facilities with capacity for up to 100 delegates',
+        capacity: 100,
         amenities: ['Projector & Screen', 'Sound System', 'Air Conditioning', 'Catering Available', 'WiFi', 'Flipcharts'],
         operatingHours: '6:00 AM - 10:00 PM',
         bookingRequired: true,
@@ -142,31 +142,23 @@ export const lodges: Lodge[] = [
         images: ['https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80']
       },
       {
-        id: 'restaurant-harare',
+        id: 'restaurant-bulawayo',
         name: 'Savanna Restaurant',
         type: 'restaurant',
         description: 'Fine dining restaurant serving authentic Zimbabwean and international cuisine',
         capacity: 80,
         operatingHours: '6:00 AM - 10:00 PM',
         amenities: ['Local Cuisine', 'International Menu', 'Private Dining', 'Bar Service', 'Outdoor Seating']
-      },
-      {
-        id: 'business-center-harare',
-        name: 'Business Center',
-        type: 'business',
-        description: 'Fully equipped business center with printing, scanning, and internet facilities',
-        operatingHours: '24/7',
-        amenities: ['Computers', 'Printing', 'Scanning', 'Fax', 'Meeting Rooms', 'Secretarial Services']
       }
     ],
     rooms: [
       {
-        id: 'presidential-suite-harare',
-        lodgeId: 'harris-lodge-harare',
-        name: 'Presidential Suite',
-        type: 'suite',
+        id: 'standard-room-executive',
+        lodgeId: 'harris-executive',
+        name: 'Standard Room',
+        type: 'standard',
         description: 'Our most luxurious accommodation with panoramic city views',
-        amenities: ['King Size Bed', 'Separate Living Room', 'Private Balcony', 'Butler Service', 'Mini Bar', 'Premium WiFi'],
+        amenities: ['King Size Bed', 'Work Desk', 'Living Area', 'Garden View', 'Mini Bar', 'Premium WiFi'],
         images: [
           'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
           'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
@@ -175,26 +167,45 @@ export const lodges: Lodge[] = [
         size: 85,
         bedConfiguration: '1 King Bed',
         available: true,
-        view: 'City Skyline',
-        basePricing: { low: 180, normal: 220, peak: 280, currency: 'USD' }
+        view: 'Garden',
+        basePricing: { low: 40, normal: 50, peak: 60, currency: 'USD' }
       },
-      {
-        id: 'executive-suite-harare',
-        lodgeId: 'harris-lodge-harare',
-        name: 'Executive Suite',
+       {
+        id: 'executive-room-executive',
+        lodgeId: 'harris-executive',
+        name: 'Executive Room',
         type: 'executive',
-        description: 'Spacious suite perfect for business travelers',
+        description: 'Our most luxurious accommodation with panoramic city views',
         amenities: ['King Size Bed', 'Work Desk', 'Living Area', 'Garden View', 'Mini Bar', 'Premium WiFi'],
         images: [
+          'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
           'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
         ],
         maxOccupancy: 2,
-        size: 60,
+        size: 85,
         bedConfiguration: '1 King Bed',
         available: true,
         view: 'Garden',
-        basePricing: { low: 120, normal: 150, peak: 190, currency: 'USD' }
-      }
+        basePricing: { low: 50, normal: 60, peak: 70, currency: 'USD' }
+      },
+        {
+        id: 'deluxe-room-executive',
+        lodgeId: 'harris-executive',
+        name: 'Deluxe Room',
+        type: 'deluxe',
+        description: 'Our most luxurious accommodation with panoramic city views',
+        amenities: ['King Size Bed', 'Work Desk', 'Living Area', 'Garden View', 'Mini Bar', 'Premium WiFi'],
+        images: [
+          'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+        ],
+        maxOccupancy: 2,
+        size: 85,
+        bedConfiguration: '1 King Bed',
+        available: true,
+        view: 'Garden',
+        basePricing: { low: 60, normal: 70, peak: 80, currency: 'USD' }
+      },
     ],
     features: ['City Center Location', 'Conference Facilities', 'Business Center', 'Fine Dining'],
     rating: 4.8,
@@ -209,28 +220,27 @@ export const lodges: Lodge[] = [
     },
     policies: {
       cancellation: 'Free cancellation up to 24 hours before check-in',
-      smokingPolicy: 'Non-smoking property',
-      petPolicy: 'Pets allowed with prior arrangement'
+      smokingPolicy: 'Non-smoking property'
     }
   },
   {
-    id: 'harris-lodge-bulawayo',
-    name: 'Harris Lodge Bulawayo',
-    slug: 'bulawayo',
-    description: 'Located in Zimbabwe\'s second-largest city, our Bulawayo lodge offers comfortable accommodation with easy access to Matobo National Park.',
-    shortDescription: 'Gateway to Matobo National Park',
+    id: 'prime-lodge-bulawayo',
+    name: 'Prime Lodge',
+    slug: 'prime-lodge',
+    description: 'Located in Zimbabwe\'s second-largest city, our Prime lodge offers comfortable accommodation with easy access to Main Roads.',
+    shortDescription: 'Access To Main Roads',
     location: {
-      address: '45 Heritage Street, Bulawayo Central',
+      address: '27 Lynden JMN Nkomo Str & Corner First Ave, Bulawayo',
       city: 'Bulawayo',
       region: 'Bulawayo Province',
       country: 'Zimbabwe',
       coordinates: { lat: -20.1500, lng: 28.5833 }
     },
-    contact: {
-      phone: '+263 9 876 5432',
-      email: 'bulawayo@harrislodges.com',
-      whatsapp: '+263 77 876 5432',
-      emergencyPhone: '+263 77 999 7777'
+   contact: {
+      phone: '+263 772 667 410',
+      email: 'theharrisguesthouse@gmail.com',
+      whatsapp: '+263 772 667 410',
+      emergencyPhone: '+263 719 667 410'
     },
     images: {
       hero: 'https://images.unsplash.com/photo-1549294413-26f195200c16?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
@@ -240,32 +250,24 @@ export const lodges: Lodge[] = [
         'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
       ]
     },
-    amenities: ['24/7 Reception', 'Free WiFi', 'Free Parking', 'Tour Arrangements', 'Restaurant', 'Garden'],
+   amenities: ['24/7 Reception', 'Dstv & WiFi', 'Secure Parking','Dining', 'Affordable'],
     facilities: [
       {
-        id: 'restaurant-bulawayo',
-        name: 'Matobo Restaurant',
-        type: 'restaurant',
-        description: 'Traditional Zimbabwean cuisine with modern flair',
-        capacity: 50,
-        operatingHours: '6:00 AM - 9:00 PM',
-        amenities: ['Local Specialties', 'Vegetarian Options', 'Garden Seating', 'Traditional Music']
-      },
-      {
-        id: 'conference-bulawayo',
-        name: 'Heritage Meeting Room',
+        id: 'conference-center-bulawayo',
+        name: 'Executive Conference Center',
         type: 'conference',
-        description: 'Intimate meeting space perfect for small conferences',
-        capacity: 30,
-        amenities: ['Projector', 'WiFi', 'Air Conditioning', 'Catering Available'],
-        operatingHours: '7:00 AM - 6:00 PM',
+        description: 'State-of-the-art conference facilities with capacity for up to 100 delegates',
+        capacity: 100,
+        amenities: ['Projector & Screen', 'Sound System', 'Air Conditioning', 'Catering Available', 'WiFi', 'Flipcharts'],
+        operatingHours: '6:00 AM - 10:00 PM',
         bookingRequired: true,
         pricing: {
-          hourly: 25,
-          halfDay: 80,
-          fullDay: 150,
+          hourly: 50,
+          halfDay: 200,
+          fullDay: 350,
           currency: 'USD'
-        }
+        },
+        images: ['https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80']
       }
     ],
     rooms: [
@@ -287,7 +289,7 @@ export const lodges: Lodge[] = [
         basePricing: { low: 80, normal: 100, peak: 130, currency: 'USD' }
       }
     ],
-    features: ['Historic Location', 'Garden Setting', 'Matobo Access', 'Cultural Tours'],
+    features: ['City Center Location', 'Conference Facilities', 'Business Center', 'Fine Dining'],
     rating: 4.6,
     reviewCount: 156,
     established: '2015',
@@ -304,84 +306,313 @@ export const lodges: Lodge[] = [
     }
   },
   {
-    id: 'harris-lodge-victoria-falls',
-    name: 'Harris Lodge Victoria Falls',
-    slug: 'victoria-falls',
-    description: 'Experience the majesty of Victoria Falls from our lodge, offering stunning views and adventure activities.',
-    shortDescription: 'Adventure gateway to Victoria Falls',
+    id: 'harris-romney-park',
+    name: 'Harris Romney Park',
+    slug: 'romney-park',
+    description: 'Located in the heart of Bulawayo CBD, offering convenient access to shopping and business districts with modern accommodation.',
+    shortDescription: 'Central CBD location with modern facilities',
     location: {
-      address: '12 Falls View Road, Victoria Falls',
-      city: 'Victoria Falls',
-      region: 'Matabeleland North',
+      address: '7 Nicholson Road, Romney Park',
+      city: 'Bulawayo',
+      region: 'Bulawayo Province',
       country: 'Zimbabwe',
-      coordinates: { lat: -17.9243, lng: 25.8572 }
+      coordinates: { lat: -20.1478, lng: 28.5892 }
     },
     contact: {
-      phone: '+263 13 456 789',
-      email: 'victoriafalls@harrislodges.com',
-      whatsapp: '+263 77 456 789',
-      emergencyPhone: '+263 77 999 6666'
+      phone: '+263 772 667 410',
+      email: 'central@harrislodges.co.zw',
+      whatsapp: '+263 772 667 410'
     },
     images: {
-      hero: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
-      featured: 'https://images.unsplash.com/photo-1631049035634-c04d68b1d1f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      hero: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
+      featured: 'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       gallery: [
-        'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
         'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
       ]
     },
-    amenities: ['Falls Views', 'Adventure Bookings', 'Free WiFi', 'Swimming Pool', 'Restaurant', 'Bar'],
+    amenities: ['24/7 Reception', 'Free WiFi', 'Secure Parking', 'Laundry Service'],
     facilities: [
       {
-        id: 'adventure-center-vf',
-        name: 'Victoria Falls Adventure Center',
-        type: 'recreation',
-        description: 'Book thrilling adventure activities including bungee jumping, white water rafting, and helicopter tours',
-        operatingHours: '6:00 AM - 6:00 PM',
-        amenities: ['Activity Bookings', 'Equipment Rental', 'Professional Guides', 'Safety Briefings']
-      },
-      {
-        id: 'pool-vf',
-        name: 'Infinity Pool',
-        type: 'pool',
-        description: 'Stunning infinity pool overlooking the Zambezi River',
-        operatingHours: '6:00 AM - 8:00 PM',
-        amenities: ['Pool Bar', 'Sun Loungers', 'Towel Service', 'River Views']
+        id: 'restaurant-central',
+        name: 'City Bistro',
+        type: 'restaurant',
+        description: 'Casual dining with local and continental dishes',
+        capacity: 40,
+        operatingHours: '7:00 AM - 9:00 PM',
+        amenities: ['Local Cuisine', 'Continental Menu', 'Takeaway Service']
       }
     ],
     rooms: [
       {
-        id: 'falls-view-suite-vf',
-        lodgeId: 'harris-lodge-victoria-falls',
-        name: 'Falls View Suite',
-        type: 'suite',
-        description: 'Premium suite with direct views of Victoria Falls',
-        amenities: ['King Size Bed', 'Falls View', 'Private Balcony', 'Mini Bar', 'Premium WiFi', 'Binoculars'],
-        images: [
-          'https://images.unsplash.com/photo-1631049035634-c04d68b1d1f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-        ],
+        id: 'standard-central',
+        lodgeId: 'harris-romney-park',
+        name: 'Standard Room',
+        type: 'standard',
+        description: 'Comfortable standard room with city views',
+        amenities: ['Queen Bed', 'Work Desk', 'Free WiFi', 'Air Conditioning', 'City View'],
+        images: ['https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'],
         maxOccupancy: 2,
-        size: 55,
+        size: 25,
+        bedConfiguration: '1 Queen Bed',
+        available: true,
+        view: 'City',
+        basePricing: { low: 35, normal: 45, peak: 55, currency: 'USD' }
+      },
+      {
+        id: 'executive-central',
+        lodgeId: 'harris-romney-park',
+        name: 'Executive Room',
+        type: 'executive',
+        description: 'Spacious executive room with premium amenities',
+        amenities: ['King Bed', 'Work Desk', 'Mini Fridge', 'Premium WiFi', 'Coffee Machine', 'City View'],
+        images: ['https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'],
+        maxOccupancy: 2,
+        size: 35,
         bedConfiguration: '1 King Bed',
         available: true,
-        view: 'Victoria Falls',
-        basePricing: { low: 200, normal: 250, peak: 350, currency: 'USD' }
+        view: 'City',
+        basePricing: { low: 55, normal: 65, peak: 75, currency: 'USD' }
       }
     ],
-    features: ['Victoria Falls Views', 'Adventure Activities', 'Infinity Pool', 'Zambezi River Access'],
-    rating: 4.9,
-    reviewCount: 289,
+    features: ['Central Location', 'Shopping Access', 'Business District'],
+    rating: 4.2,
+    reviewCount: 89,
     established: '2018',
     status: 'active',
     operatingHours: {
       reception: '24/7',
-      restaurant: '6:00 AM - 10:00 PM',
+      restaurant: '7:00 AM - 9:00 PM',
       checkIn: '2:00 PM',
       checkOut: '11:00 AM'
     },
     policies: {
       cancellation: 'Free cancellation up to 48 hours before check-in',
       smokingPolicy: 'Non-smoking property'
+    }
+  },
+  {
+    id: 'zim-harris',
+    name: 'Zim Harris',
+    slug: 'zim-harris',
+    description: 'Peaceful lodge in Suburbs near CBD, offering quiet accommodation with easy access to the city center and local attractions.',
+    shortDescription: 'Quiet suburban location near CBD',
+    location: {
+      address: '70 Park Road, Suburbs, Bulawayo',
+      city: 'Bulawayo',
+      region: 'Bulawayo Province',
+      country: 'Zimbabwe',
+      coordinates: { lat: -20.1235, lng: 28.6045 }
+    },
+    contact: {
+      phone: '+263 772 667 410',
+      email: 'suburban@harrislodges.co.zw',
+      whatsapp: '+263 772 667 410'
+    },
+    images: {
+      hero: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
+      featured: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      gallery: [
+        'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+      ]
+    },
+    amenities: ['Free WiFi', 'Parking', 'Garden Area', 'Quiet Location'],
+    facilities: [],
+    rooms: [
+      {
+        id: 'deluxe-suburban',
+        lodgeId: 'zim-harris',
+        name: 'Deluxe Room',
+        type: 'deluxe',
+        description: 'Spacious deluxe room with garden views',
+        amenities: ['King Bed', 'Garden View', 'Work Area', 'Free WiFi', 'Mini Fridge'],
+        images: ['https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'],
+        maxOccupancy: 2,
+        size: 40,
+        bedConfiguration: '1 King Bed',
+        available: true,
+        view: 'Garden',
+        basePricing: { low: 45, normal: 55, peak: 65, currency: 'USD' }
+      }
+    ],
+    features: ['Quiet Environment', 'Garden Setting', 'Near CBD'],
+    rating: 4.5,
+    reviewCount: 67,
+    established: '2019',
+    status: 'active',
+    operatingHours: {
+      reception: '7:00 AM - 10:00 PM',
+      checkIn: '2:00 PM',
+      checkOut: '10:00 AM'
+    },
+    policies: {
+      cancellation: 'Free cancellation up to 24 hours before check-in',
+      smokingPolicy: 'Smoking allowed in designated outdoor areas'
+    }
+  },
+  {
+    id: 'harris-northend',
+    name: 'Harris Northend Lodge',
+    slug: 'northend',
+    description: 'Professional accommodation designed for business travelers, located near government offices and commercial centers in Bulawayo CBD.',
+    shortDescription: 'Business-focused lodge near government offices',
+    location: {
+      address: '3 Harris Road, Northend,Bulawayo',
+      city: 'Bulawayo',
+      region: 'Bulawayo Province',
+      country: 'Zimbabwe',
+      coordinates: { lat: -20.1523, lng: 28.5823 }
+    },
+    contact: {
+      phone: '+263 772 667 410',
+      email: 'business@harrislodges.co.zw',
+      whatsapp: '+263 772 667 410',
+      emergencyPhone: '+263 719 667 410'
+    },
+    images: {
+      hero: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
+      featured: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      gallery: [
+        'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+      ]
+    },
+    amenities: ['Business Center', '24/7 Reception', 'High-Speed WiFi', 'Meeting Rooms', 'Secure Parking'],
+    facilities: [
+      {
+        id: 'conference-business',
+        name: 'Professional Conference Room',
+        type: 'conference',
+        description: 'Modern conference room ideal for business meetings and small seminars',
+        capacity: 50,
+        amenities: ['Video Conferencing', 'Projector', 'Whiteboard', 'WiFi', 'Catering Available'],
+        operatingHours: '7:00 AM - 9:00 PM',
+        bookingRequired: true,
+        pricing: {
+          hourly: 30,
+          halfDay: 120,
+          fullDay: 200,
+          currency: 'USD'
+        }
+      }
+    ],
+    rooms: [
+      {
+        id: 'standard-business',
+        lodgeId: 'harris-northend',
+        name: 'Standard Room',
+        type: 'standard',
+        description: 'Efficient standard room with work facilities',
+        amenities: ['Twin Beds', 'Large Work Desk', 'Business WiFi', 'Phone Line'],
+        images: ['https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'],
+        maxOccupancy: 2,
+        size: 28,
+        bedConfiguration: '2 Twin Beds',
+        available: true,
+        basePricing: { low: 40, normal: 50, peak: 60, currency: 'USD' }
+      },
+      {
+        id: 'executive-business',
+        lodgeId: 'harris-northend',
+        name: 'Executive Room',
+        type: 'executive',
+        description: 'Premium room with enhanced business amenities',
+        amenities: ['King Bed', 'Executive Desk', 'Mini Bar', 'Coffee Machine', 'Premium WiFi', 'Printer Access'],
+        images: ['https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'],
+        maxOccupancy: 2,
+        size: 38,
+        bedConfiguration: '1 King Bed',
+        available: true,
+        basePricing: { low: 65, normal: 75, peak: 85, currency: 'USD' }
+      },
+      {
+        id: 'deluxe-business',
+        lodgeId: 'harris-northend',
+        name: 'Deluxe Suite',
+        type: 'deluxe',
+        description: 'Luxury suite with separate living area for business entertainment',
+        amenities: ['King Bed', 'Living Area', 'Dining Space', 'Executive Desk', 'Mini Bar', 'Premium WiFi', 'City View'],
+        images: ['https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'],
+        maxOccupancy: 3,
+        size: 55,
+        bedConfiguration: '1 King Bed + Sofa Bed',
+        available: true,
+        view: 'City',
+        basePricing: { low: 85, normal: 100, peak: 120, currency: 'USD' }
+      }
+    ],
+    features: ['Government District', 'Business Center', 'Meeting Facilities', 'Professional Service'],
+    rating: 4.6,
+    reviewCount: 234,
+    established: '2012',
+    status: 'active',
+    operatingHours: {
+      reception: '24/7',
+      checkIn: '1:00 PM',
+      checkOut: '12:00 PM'
+    },
+    policies: {
+      cancellation: 'Free cancellation up to 48 hours before check-in',
+      smokingPolicy: 'Non-smoking property'
+    }
+  },
+  {
+    id: 'silver-sands-lodge',
+    name: 'Silver Sands Lodge',
+    slug: 'silver-sands',
+    description: 'Affordable accommodation in Bulawayo with essential amenities, perfect for budget-conscious travelers visiting the city.',
+    shortDescription: 'Affordable lodging with essential amenities',
+    location: {
+      address: '22 Forbes Avenue,Northend, Bulawayo',
+      city: 'Bulawayo',
+      region: 'Bulawayo Province',
+      country: 'Zimbabwe',
+      coordinates: { lat: -20.1567, lng: 28.5756 }
+    },
+    contact: {
+      phone: '+263 772 667 410',
+      email: 'budget@harrislodges.co.zw',
+      whatsapp: '+263 772 667 410'
+    },
+    images: {
+      hero: 'https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
+      featured: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      gallery: [
+        'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+      ]
+    },
+    amenities: ['Free WiFi', 'Parking', 'Reception Desk'],
+    facilities: [],
+    rooms: [
+      {
+        id: 'standard-budget',
+        lodgeId: 'silver-sands-lodge',
+        name: 'Standard Room',
+        type: 'standard',
+        description: 'Simple, clean room with basic amenities',
+        amenities: ['Double Bed', 'Free WiFi', 'Private Bathroom'],
+        images: ['https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'],
+        maxOccupancy: 2,
+        size: 20,
+        bedConfiguration: '1 Double Bed',
+        available: true,
+        basePricing: { low: 25, normal: 30, peak: 35, currency: 'USD' }
+      }
+    ],
+    features: ['Affordable Rates', 'Central Location', 'Clean Accommodation'],
+    rating: 3.8,
+    reviewCount: 145,
+    established: '2020',
+    status: 'active',
+    operatingHours: {
+      reception: '7:00 AM - 10:00 PM',
+      checkIn: '2:00 PM',
+      checkOut: '10:00 AM'
+    },
+    policies: {
+      cancellation: 'Free cancellation up to 24 hours before check-in',
+      smokingPolicy: 'Smoking allowed in designated areas'
     }
   }
 ];

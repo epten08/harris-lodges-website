@@ -10,6 +10,7 @@ import FeatureCard from '@/components/FeatureCard';
 import LodgeComparisonTable from '@/components/LodgeComparisonTable';
 import LodgeMapSection from '@/components/LodgeMapSection';
 import LodgeStatsSection from '@/components/LodgeStatsSection';
+import PageHero from '@/components/PageHero';
 
 export const metadata: Metadata = {
   title: 'Our Lodges - Harris Lodges Zimbabwe',
@@ -24,19 +25,12 @@ export default function LodgesPage() {
   return (
     <div className="min-h-screen bg-lodge-neutral">
       {/* Header */}
-      <section className="bg-lodge-primary text-white py-16">
-        <div className="container-max section-padding">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 font-serif">
-              Our Lodge Locations
-            </h1>
-            <p className="text-xl max-w-3xl mx-auto leading-relaxed">
-              Discover Harris Lodges across Zimbabwe&apos;s most beautiful destinations. 
-              Each lodge offers unique experiences while maintaining our signature hospitality.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero 
+        title='Our Lodge Locations'
+        description='Discover Harris Lodges across Zimbabwe&apos;s most beautiful destinations. 
+              Each lodge offers unique experiences while maintaining our signature hospitality.'
+      />
+      
 
       {/* Quick Stats */}
       <LodgeStatsSection lodges={lodges} />

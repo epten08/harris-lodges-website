@@ -128,7 +128,7 @@ const FacilityCard = ({ facility }: { facility: Facility }) => {
       {facility.bookingRequired && (
         <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
           <p className="text-yellow-800 text-sm font-medium">
-            📋 Advance booking required
+            Advance booking required
           </p>
         </div>
       )}
@@ -196,7 +196,7 @@ export default function LodgePage({ params }: { params: { slug: string } }) {
                 href={`/lodges/${lodge.slug}/gallery`}
                 className="btn-secondary text-lg px-8 py-4"
               >
-                <Camera className="w-5 h-5 mr-2" />
+               
                 Photo Gallery
               </Link>
             </div>
@@ -270,7 +270,7 @@ export default function LodgePage({ params }: { params: { slug: string } }) {
               {lodge.established && (
                 <div className="bg-lodge-accent bg-opacity-20 p-4 rounded-lg border-l-4 border-lodge-accent">
                   <p className="text-lodge-dark font-medium">
-                    🏛️ Proudly serving guests since {lodge.established}
+                  Proudly serving guests since {lodge.established}
                   </p>
                 </div>
               )}
@@ -558,13 +558,14 @@ export default function LodgePage({ params }: { params: { slug: string } }) {
                   </div>
                   
                   <div className="flex items-center justify-between">
-                    <div className="text-sm">
+                    {/* do not display prices */}
+                    {/* <div className="text-sm">
                       <span className="text-gray-600">From </span>
                       <span className="font-bold text-lodge-primary">
                         ${room.basePricing.low}
                       </span>
                       <span className="text-gray-600">/night</span>
-                    </div>
+                    </div> */}
                     <span className={`px-2 py-1 text-xs font-medium rounded-full ${
                       room.available 
                         ? 'bg-green-100 text-green-800' 
@@ -658,7 +659,7 @@ export default function LodgePage({ params }: { params: { slug: string } }) {
                 </div>
                 
                 <p className="text-gray-700 text-sm leading-relaxed mb-3">
-                  "{review.comment}"
+                  {review.comment}
                 </p>
                 
                 <p className="text-xs text-gray-500">{review.date}</p>

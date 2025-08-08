@@ -92,9 +92,7 @@ const Footer = () => {
               Online Booking
             </Link>
           </li>
-          <li>
-            <span className="text-gray-300 text-sm">Airport Transfers</span>
-          </li>
+         
           <li>
             <span className="text-gray-300 text-sm">24/7 Room Service</span>
           </li>
@@ -104,9 +102,7 @@ const Footer = () => {
           <li>
             <span className="text-gray-300 text-sm">Conference Facilities</span>
           </li>
-          <li>
-            <span className="text-gray-300 text-sm">Tour Arrangements</span>
-          </li>
+         
         </ul>
       </div>
 
@@ -117,8 +113,8 @@ const Footer = () => {
           <div className="flex items-start space-x-3">
             <MapPin className="w-5 h-5 text-lodge-accent mt-0.5 flex-shrink-0" />
             <div className="text-sm text-gray-300">
-              <p>123 Hospitality Avenue</p>
-              <p>Harare CBD, Zimbabwe</p>
+              <p>104 J. Tongogara & 10 Ave</p>
+              <p>Bulawayo, Zimbabwe</p>
             </div>
           </div>
           
@@ -126,7 +122,7 @@ const Footer = () => {
             <Phone className="w-5 h-5 text-lodge-accent flex-shrink-0" />
             <div className="text-sm">
               <a href="tel:+263123456789" className="text-gray-300 hover:text-white transition-colors">
-                +263 123 456 789
+                +263 772 667 410
               </a>
             </div>
           </div>
@@ -135,7 +131,7 @@ const Footer = () => {
             <Mail className="w-5 h-5 text-lodge-accent flex-shrink-0" />
             <div className="text-sm">
               <a href="mailto:info@harrislodges.com" className="text-gray-300 hover:text-white transition-colors">
-                info@harrislodges.com
+                theharrisguesthouse@gmail.com
               </a>
             </div>
           </div>
@@ -187,7 +183,7 @@ const Footer = () => {
         </div>
         
         <div className="text-sm text-gray-300">
-          <p>Made with ❤️ in Zimbabwe</p>
+          <p>Made by ep1008 for Harris Lodges</p>
         </div>
       </div>
     </div>
